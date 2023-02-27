@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countries</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header><h1 class="text-5xl text-center mt-14 font-bold text-cyan-500 mb-14">All The Countries</h1></header>
+    <section class="container mx-auto">
+        <div class="flex justify-around mb-8">
+            <div class="dropdown">
+                <label id="region-btn" onclick="loadAllCountries()" tabindex="0" class="btn m-1">Region</label>
+                <ul id="region-select" tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">        
+                </ul>
+              </div>
+            <div class="dropdown">
+                <label id="language-btn" onclick="loadAllCountries()" tabindex="0" class="btn m-1">Language</label>
+                <ul id="language-select" tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+               
+                </ul>
+              </div>
+            <div class="dropdown">
+                <label tabindex="0" class="btn m-1">Capital City</label>
+                <ul  tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                  <li><a>Item 1</a></li>
+                  <li><a>Item 2</a></li>
+                </ul>
+              </div>
+        </div>
+        <div class="grid md:gap-x-8 md:grid-cols-2 lg:grid-cols-3 gap-y-9" id="countries-container">
+            
+        </div>
+        <!-- show all button -->
+        <!-- <div>
+          <button onclick="showAll()" class="btn btn-outline">Show All</button>
+        </div> -->
+        <!-- modal -->
+        <div>
+
+            <input type="checkbox" id="country-modal" class="modal-toggle" />
+            <div class="modal modal-bottom sm:modal-middle">
+              <div class="modal-box">
+                <div id="modal-detail">
+                    
+                </div>
+                <div class="modal-action">
+                  <label for="country-modal" class="btn">Close!</label>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/countries.js"></script>
+  </body>
+</html>
+
