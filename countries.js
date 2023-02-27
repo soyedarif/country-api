@@ -10,7 +10,7 @@ const loadAllCountries = () => {
 /* get key by value in obj */
 const getKeyByValue=(obj,value)=>{
   for(const key in obj){
-    if(obj[key]===value){
+    if(obj[key]===value && value !==undefined){
       return key;
     }
   }
@@ -35,7 +35,10 @@ const setlanguageOption=countries=>{
       countries.forEach(country=>{
         const languageObj= country?.languages;
         const key=getKeyByValue(languageObj,language)
-        console.log(key) //loadByLanguage(key) jabe ekhane theke 47no. line e
+        if(key!==undefined){
+
+          loadByLanguage(key) //loadByLanguage(key) jabe ekhane theke 47no. line e
+        }
       })
     })
     option.appendChild(link);
@@ -44,11 +47,11 @@ const setlanguageOption=countries=>{
   document.getElementById('language-btn').removeAttribute('onclick')
 }
 /* load by language */
-/* const loadByLanguage=lang=>{
+const loadByLanguage=lang=>{
   fetch(`https://restcountries.com/v3.1/lang/${lang}`)
   .then(res=>res.json())
   .then(data=>console.log(data))
-} */
+}
 /* set region option */
 const setRegionOption=region=>{
   const regionSet = [];
