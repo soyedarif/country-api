@@ -3,7 +3,8 @@ const loadAllCountries = () => {
     .then(res => res.json())
     .then(data =>{
       setRegionOption(data);
-      setlanguageOption(data)
+      setlanguageOption(data);
+      setCapitalOption(data);
     });
       
 }
@@ -15,42 +16,43 @@ const getKeyByValue=(obj,value)=>{
     }
   }
 }
+/* set capital options*/
+const setCapitalOption=data=>{
+  console.log(data);
+}
+loadAllCountries()
 /* set language option */
-const setlanguageOption=countries=>{
-  const languageValueSet=[];
-  countries.forEach(country=>{
-    const languageObj= country.languages;
-    const lang= languageObj && Object.values(languageObj)[0];
-    if(languageValueSet.includes(lang)===false && lang !== undefined){
-      languageValueSet.push(lang)
+const setlanguageOption = countries => {
+  const languageMap = {};
+
+  countries.forEach(country => {
+    const languageObj = country.languages;
+    const langValue = languageObj && Object.values(languageObj)[0];
+    if (langValue && !(langValue in languageMap)) { //
+      const key = getKeyByValue(languageObj, langValue);
+      languageMap[langValue] = key;
     }
-  })
-
-  languageValueSet.forEach(language=>{
-    const languageSelect=document.getElementById('language-select');
-    const option=document.createElement('li');
-    const link=document.createElement('a');
-    link.innerText=language;
-    link.addEventListener('click',function(){
-      countries.forEach(country=>{
-        const languageObj= country?.languages;
-        const key=getKeyByValue(languageObj,language)
-        if(key!==undefined){
-
-          loadByLanguage(key) //loadByLanguage(key) jabe ekhane theke 47no. line e
-        }
-      })
-    })
+  });
+  const languageSelect = document.getElementById('language-select');
+  for (const langValue in languageMap) {
+    const option = document.createElement('li');
+    const link = document.createElement('a');
+    link.innerText = langValue;
+    link.addEventListener('click', function () {
+      const key = languageMap[langValue];
+      loadByLanguage(key);
+    });
     option.appendChild(link);
     languageSelect.appendChild(option);
-  })
-  document.getElementById('language-btn').removeAttribute('onclick')
-}
+  }
+  document.getElementById('language-btn').removeAttribute('onclick');
+}; 
+
 /* load by language */
 const loadByLanguage=lang=>{
   fetch(`https://restcountries.com/v3.1/lang/${lang}`)
   .then(res=>res.json())
-  .then(data=>console.log(data))
+  .then(data=>displayCountries(data))
 }
 /* set region option */
 const setRegionOption=region=>{
